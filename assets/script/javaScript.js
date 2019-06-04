@@ -1,58 +1,83 @@
-
+let questionsIndex = 0
 let questions = [
     {
         question: "What state was Jared born in?",
         answers: ["Utah", "Washington", "Virginia", "Idaho"],
-        Correct: 0,
+        Correct: "Utah",
     },
     
     {
         question: "How many siblings does Jared have",
         answers: ["Two", "Three", "Four", "Five"],
-        Correct: 1,
+        Correct: "Three",
     },
 
     {
         question: "What mountain has Jared summited?",
         answers: ["Timpanogos", "Ranier", "Hood", "Baker"],
-        Correct: 3,
+        Correct: "Baker",
     },
 
     {
         question: "What year did Jared graduate Highschool?",
         answers: ["2010", "2012", "2014", "2015"],
-        Correct: 2,
+        Correct: "2014",
     },
 
     {
         question: "How old was Jared when he built his first computer?",
         answers: ["12", "13", "14", "15"],
-        Correct: 0,
+        Correct: "12",
     },
 
     {
         question: "What has Jared built from yard junk?",
         answers: ["Go-Kart", "Mountain Board", "Trebuche", "Hover Craft"],
-        Correct: 3,
+        Correct: "Hover Craft",
     },
 
     {
         question: "What's Jared's favorite kicks?",
         answers: ["Roundhouse", "Kyrie 3", '"Kick"-starter.com', "Recoil"],
-        Correct: 1,
+        Correct: "Kyrie 3",
     },
 ];
-
-let questionCounter = 0;
-let answerVeracity = Boolean
+let answerVeracity = Boolean;
 
 // function to change to the next question and answer set
+let printNextQuestion = function() {
+    $("#questionId").html(questions[questionsIndex].question)
+    for (var i = 0; i < questions[questionsIndex].answers.length; i++) {
+        $("#answersID-"+i).html(questions[questionsIndex].answers[i])
+    };
+    questionsIndex = questionsIndex++
+    setTimeout(truthChecker, 5000)
+}
+
+let truthChecker = function() {
+    if ($(this).text() === questions[questionsIndex].Correct) {
+       alert("Hooray!!!");
+       printNextQuestion();
+    } else {
+      alert("Nope");
+      printNextQuestion();
+    }
+}
 // randomize answers
 
 // timeout function
+
 // time remaining notifier
 // correct/incorrect record keeper
 // t/f checker
+$(".btn-primary").click(function() {
+    clearTimeout(printNextQuestion)
+    truthChecker()
+});
+
+
 // correct notification
 // incorrect notification
 // restart fx
+
+printNextQuestion()
