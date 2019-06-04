@@ -43,6 +43,9 @@ let questions = [
     },
 ];
 let answerVeracity = Boolean;
+let timer;
+let correct = 0;
+let incorrect = 0;
 
 // function to change to the next question and answer set
 let printNextQuestion = function() {
@@ -51,18 +54,9 @@ let printNextQuestion = function() {
         $("#answersID-"+i).html(questions[questionsIndex].answers[i])
     };
     questionsIndex = questionsIndex++
-    setTimeout(truthChecker, 5000)
+    //timer = setTimeout(truthChecker, 5000)
 }
 
-let truthChecker = function() {
-    if ($(this).text() === questions[questionsIndex].Correct) {
-       alert("Hooray!!!");
-       printNextQuestion();
-    } else {
-      alert("Nope");
-      printNextQuestion();
-    }
-}
 // randomize answers
 
 // timeout function
@@ -71,8 +65,16 @@ let truthChecker = function() {
 // correct/incorrect record keeper
 // t/f checker
 $(".btn-primary").click(function() {
-    clearTimeout(printNextQuestion)
-    truthChecker()
+    clearTimeout(timer)
+    if ($(this).text() === questions[questionsIndex].Correct) {
+        alert("Hooray!!!");
+        correct++
+        printNextQuestion();
+     } else {
+       alert("Nope");
+       incorrect++
+       printNextQuestion();
+     }
 });
 
 
