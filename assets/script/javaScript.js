@@ -53,7 +53,6 @@ let printNextQuestion = function() {
     for (var i = 0; i < questions[questionsIndex].answers.length; i++) {
         $("#answersID-"+i).html(questions[questionsIndex].answers[i])
     };
-    questionsIndex = questionsIndex++
     //timer = setTimeout(truthChecker, 5000)
 }
 
@@ -69,10 +68,12 @@ $(".btn-primary").click(function() {
     if ($(this).text() === questions[questionsIndex].Correct) {
         alert("Hooray!!!");
         correct++
+        questionsIndex = questionsIndex + 1
         printNextQuestion();
      } else {
        alert("Nope");
        incorrect++
+       questionsIndex = questionsIndex + 1
        printNextQuestion();
      }
 });
@@ -82,4 +83,4 @@ $(".btn-primary").click(function() {
 // incorrect notification
 // restart fx
 
-printNextQuestion()
+printNextQuestion();
