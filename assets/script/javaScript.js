@@ -42,7 +42,7 @@ let questions = [
         Correct: "Kyrie 3",
     },
 ];
-let seconds = 5;
+let seconds = 10;
 let count;
 let correct = 0;
 let incorrect = 0;
@@ -55,12 +55,14 @@ function atInterval() {
     $("#timerId").html(seconds);
     if (seconds === 0) {
         clearInterval(count);
+        alert("Too slow Joe!")
+        incorrect++;
         printNextQuestion();
     }
 };
 
 function countdown() {
-    seconds = 5;
+    seconds = 10;
     clearInterval(count);
     count = setInterval(atInterval, 1000);
 };
